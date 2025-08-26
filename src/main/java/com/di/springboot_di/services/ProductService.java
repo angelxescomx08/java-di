@@ -15,8 +15,10 @@ public class ProductService {
                 .stream()
                 .map(product -> {
                     Long price = (long) (product.getPrice() * 1.16);
-                    product.setPrice(price);
-                    return product;
+                    //return new Product(product.getId(),product.getName(),price);
+                    Product newProd = product.clone();
+                    newProd.setPrice(price);
+                    return newProd;
                 })
                 .collect(Collectors.toList());
     }

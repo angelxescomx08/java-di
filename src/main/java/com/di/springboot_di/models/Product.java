@@ -1,6 +1,6 @@
 package com.di.springboot_di.models;
 
-public class Product {
+public class Product implements Cloneable{
 
     private Long id;
     private String name;
@@ -40,4 +40,12 @@ public class Product {
     }
 
 
+    @Override
+    public Product clone() {
+        try {
+            return (Product) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Product(id, name, price);
+        }
+    }
 }
