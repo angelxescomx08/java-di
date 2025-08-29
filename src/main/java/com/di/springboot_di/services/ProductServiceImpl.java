@@ -4,14 +4,22 @@ import com.di.springboot_di.models.Product;
 import com.di.springboot_di.repositories.ProductRepository;
 import com.di.springboot_di.repositories.ProductRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Primary
 @Service
 public class ProductServiceImpl implements ProductService{
+
+    @Autowired
+    private Environment environment;
 
     @Autowired
     private ProductRepository repository;
@@ -21,7 +29,8 @@ public class ProductServiceImpl implements ProductService{
         return repository.findAll()
                 .stream()
                 .map(product -> {
-                    Long price = (long) (product.getPrice() * 1.16);
+                    Double tax = environment.getProperty("tax", Double.class);
+                    Long price = (long) (product.getPrice() * tax);
                     //return new Product(product.getId(),product.getName(),price);
                     Product newProd = product.clone();
                     newProd.setPrice(price);
