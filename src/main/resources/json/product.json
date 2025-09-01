@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "PlayStation",
+    "price": 3711
+  },
+  {
+    "id": 2,
+    "name": "Game Cube",
+    "price": 6380
+  },
+  {
+    "id": 3,
+    "name": "Xbox",
+    "price": 1392
+  },
+  {
+    "id": 4,
+    "name": "Swictch 2",
+    "price": 1392
+  }
+]
